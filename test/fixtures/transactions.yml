@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  credit: false
+  debit: false
+  transfer: false
+  account: one
+
+two:
+  credit: false
+  debit: false
+  transfer: false
+  account: two
