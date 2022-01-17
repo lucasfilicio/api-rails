@@ -1,0 +1,1470 @@
+  [1m[35m (46.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (15.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (31.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (13.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAccounts (20220117005623)
+  [1m[36mTRANSACTION (16.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.8ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" bigserial primary key, "name" character varying, "birth_date" timestamp(6), "photo" character varying, "account_bank" character varying, "balance" float DEFAULT 0.0, "password_bank" character varying DEFAULT '4227', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (25.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220117005623"]]
+  [1m[36mTRANSACTION (12.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (15.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (21.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (13.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-01-17 00:59:15.762884"], ["updated_at", "2022-01-17 00:59:15.762884"]]
+  [1m[36mTRANSACTION (14.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (14.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (14.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/accounts" for ::1 at 2022-01-16 22:03:19 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (15.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#create as */*
+  Parameters: {"nome"=>"aeaeae", "nascimento"=>nil, "foto"=>nil, "n_conta"=>11, "saldo"=>0.0, "account"=>{}}
+Completed 400 Bad Request in 77ms (ActiveRecord: 44.7ms | Allocations: 16821)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: account):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started GET "/accounts" for ::1 at 2022-01-16 22:03:23 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"nome"=>"aeaeae", "nascimento"=>nil, "foto"=>nil, "n_conta"=>11, "saldo"=>0.0, "account"=>{}}
+  [1m[36mAccount Load (15.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 58ms (Views: 41.6ms | ActiveRecord: 15.5ms | Allocations: 1153)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:04:24 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+  [1m[36mTRANSACTION (12.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (11.8ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Lucas"], ["birth_date", "2022-01-15 00:00:00"], ["photo", "url"], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:04:25.119875"], ["updated_at", "2022-01-17 01:04:25.119875"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (10.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 280ms (Views: 1.8ms | ActiveRecord: 50.1ms | Allocations: 14589)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:04:33 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+  [1m[36mTRANSACTION (14.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (11.3ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Lucas"], ["birth_date", "2022-01-15 00:00:00"], ["photo", "url"], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:04:33.140296"], ["updated_at", "2022-01-17 01:04:33.140296"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 78ms (Views: 1.6ms | ActiveRecord: 50.9ms | Allocations: 2261)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:05:16 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 53.8ms | Allocations: 1943)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:05:46 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 53.0ms | Allocations: 1918)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:06:10 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Lucas", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 29.6ms | Allocations: 1017)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:06:18 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms | Allocations: 868)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started GET "/accounts" for ::1 at 2022-01-16 22:06:22 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+  [1m[36mAccount Load (15.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 56ms (Views: 28.4ms | ActiveRecord: 27.1ms | Allocations: 3017)
+
+
+Started GET "/accounts" for ::1 at 2022-01-16 22:07:05 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 30.4ms | Allocations: 1059)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+Started GET "/accounts" for ::1 at 2022-01-16 22:07:17 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 29.3ms | Allocations: 2300)
+
+
+  
+NameError (undefined local variable or method `account_bank' for #<AccountsController:0x0000000001a518>
+Did you mean?  account_path):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+Started GET "/accounts" for ::1 at 2022-01-16 22:07:24 -0300
+Processing by AccountsController#index as */*
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms | Allocations: 2071)
+
+
+  
+NameError (undefined local variable or method `account_bank' for #<AccountsController:0x0000000001a5b8>
+Did you mean?  account_path):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+Started GET "/accounts" for ::1 at 2022-01-16 22:07:50 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms | Allocations: 2071)
+
+
+  
+NameError (undefined local variable or method `account_bank' for #<AccountsController:0x0000000001a630>
+Did you mean?  account_path):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+Started GET "/accounts" for ::1 at 2022-01-16 22:07:53 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+  [1m[36mAccount Load (22.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 65ms (Views: 16.0ms | ActiveRecord: 76.5ms | Allocations: 3084)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:08:01 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-15", "photo"=>"url"}}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 900)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:08:36 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url"}}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 868)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:08:46 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url"}}
+  [1m[36mTRANSACTION (17.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (24.9ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Luca222s"], ["birth_date", "2022-01-05 00:00:00"], ["photo", "url"], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:08:47.524840"], ["updated_at", "2022-01-17 01:08:47.524840"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (26.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 121ms (Views: 2.7ms | ActiveRecord: 120.7ms | Allocations: 4275)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:09:03 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url"}}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 30.5ms | Allocations: 984)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:09:22 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url"}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 31.2ms | Allocations: 984)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started GET "/accounts" for ::1 at 2022-01-16 22:10:37 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (12.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url", "account"=>{"name"=>"Luca222s", "birth_date"=>"2022-01-05", "photo"=>"url"}}
+  [1m[36mAccount Load (21.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 145ms (Views: 32.1ms | ActiveRecord: 73.8ms | Allocations: 20620)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:10:45 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "photo"=>"url", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05", "photo"=>"url"}}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms | Allocations: 990)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:10:52 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 870)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:11:19 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 29.0ms | Allocations: 1078)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:11:41 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 29.8ms | Allocations: 1042)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:51:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:11:47 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mTRANSACTION (21.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (11.6ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "eaeeae"], ["birth_date", "2022-01-05 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:11:48.013342"], ["updated_at", "2022-01-17 01:11:48.013342"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (27.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 106ms (Views: 1.6ms | ActiveRecord: 113.0ms | Allocations: 4885)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:16:37 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (14.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mTRANSACTION (22.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (11.8ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "eaeeae"], ["birth_date", "2022-01-05 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:16:39.692714"], ["updated_at", "2022-01-17 01:16:39.692714"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 203ms (Views: 2.7ms | ActiveRecord: 130.9ms | Allocations: 24451)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:17:08 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 29.0ms | Allocations: 1047)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:17:14 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 29.8ms | Allocations: 986)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:18:04 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 53.5ms | Allocations: 1983)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:48:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+  [1m[36mActiveRecord::SchemaMigration Pluck (14.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (19.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (15.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (14.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (13.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAccounts (20220117005623)
+  [1m[36mTRANSACTION (14.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.2ms)[0m  [1m[35mDROP TABLE "accounts"[0m
+  [1m[36mActiveRecord::SchemaMigration Delete All (24.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20220117005623"]]
+  [1m[36mTRANSACTION (12.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (15.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (12.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (14.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (15.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (13.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (13.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (15.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (14.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (14.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAccounts (20220117005623)
+  [1m[36mTRANSACTION (22.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.6ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" bigserial primary key, "name" character varying, "birth_date" timestamp(6), "photo" character varying, "account_bank" character varying, "balance" float DEFAULT 0.0, "password_bank" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (23.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220117005623"]]
+  [1m[36mTRANSACTION (12.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (14.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (16.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (15.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (15.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (13.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (15.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (20.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7612297450115808345)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (13.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/accounts" for ::1 at 2022-01-16 22:20:21 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (13.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 111ms (ActiveRecord: 71.6ms | Allocations: 21234)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:48:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started GET "/accounts" for ::1 at 2022-01-16 22:20:30 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mAccount Load (15.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 33ms (Views: 16.8ms | ActiveRecord: 15.5ms | Allocations: 1145)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:20:34 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 234)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:48:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:20:42 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mTRANSACTION (18.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:19:in `create'
+  [1m[36mAccount Create (10.7ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "eaeeae"], ["birth_date", "2022-01-05 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:20:43.700593"], ["updated_at", "2022-01-17 01:20:43.700593"]]
+  ↳ app/controllers/accounts_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (25.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:19:in `create'
+Completed 201 Created in 94ms (Views: 1.5ms | ActiveRecord: 94.7ms | Allocations: 4993)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:21:12 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 52.0ms | Allocations: 1962)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:48:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:21:25 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 29.4ms | Allocations: 1036)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:48:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:21:45 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 29.8ms | Allocations: 973)
+
+
+  
+NoMethodError (undefined method `secure_random' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:48:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:22:07 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mTRANSACTION (21.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (13.4ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "eaeeae"], ["birth_date", "2022-01-05 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:22:07.905386"], ["updated_at", "2022-01-17 01:22:07.905386"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (27.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 94ms (Views: 2.2ms | ActiveRecord: 104.0ms | Allocations: 4249)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:22:44 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 30.5ms | Allocations: 986)
+
+
+  
+NoMethodError (undefined method `secure_number' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:23:01 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:49: syntax error, unexpected ':', expecting `end'
+      number: SecureRandom.secure_number(1...
+            ^
+):
+  
+app/controllers/accounts_controller.rb:49: syntax error, unexpected ':', expecting `end'
+app/controllers/accounts_controller.rb:49: syntax error, unexpected ':', expecting `end'
+Started GET "/accounts" for ::1 at 2022-01-16 22:23:32 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mAccount Load (19.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:10:in `index'
+Completed 200 OK in 49ms (Views: 13.0ms | ActiveRecord: 60.1ms | Allocations: 3135)
+
+
+Started GET "/accounts" for ::1 at 2022-01-16 22:23:51 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:7: syntax error, unexpected ':', expecting `end'
+    account = number: SecureRandom.secure_number(1...
+                    ^
+):
+  
+app/controllers/accounts_controller.rb:7: syntax error, unexpected ':', expecting `end'
+app/controllers/accounts_controller.rb:7: syntax error, unexpected ':', expecting `end'
+Started GET "/accounts" for ::1 at 2022-01-16 22:24:02 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 29.7ms | Allocations: 1048)
+
+
+  
+NoMethodError (undefined method `secure_number' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+Started GET "/accounts" for ::1 at 2022-01-16 22:24:24 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:7: syntax error, unexpected ')', expecting `end'
+...account =  Faker::Bank.account))
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:7: syntax error, unexpected ')', expecting `end'
+app/controllers/accounts_controller.rb:7: syntax error, unexpected ')', expecting `end'
+Started GET "/accounts" for ::1 at 2022-01-16 22:24:35 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:7: syntax error, unexpected ')', expecting `end'
+... =  Faker::Bank.account_number))
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:7: syntax error, unexpected ')', expecting `end'
+app/controllers/accounts_controller.rb:7: syntax error, unexpected ')', expecting `end'
+Started GET "/accounts" for ::1 at 2022-01-16 22:24:48 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mAccount Load (20.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `index'
+Completed 200 OK in 64ms (Views: 13.0ms | ActiveRecord: 76.9ms | Allocations: 3074)
+
+
+Started GET "/accounts" for ::1 at 2022-01-16 22:25:46 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mAccount Load (22.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 48ms (Views: 12.4ms | ActiveRecord: 63.8ms | Allocations: 3007)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:25:50 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 221)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:26:27 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 29.6ms | Allocations: 199)
+
+
+  
+TypeError (:Faker is not a class/module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:26:46 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 55.5ms | Allocations: 1976)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:27:10 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (14.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 121ms (ActiveRecord: 69.5ms | Allocations: 21217)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:27:52 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 29.4ms | Allocations: 989)
+
+
+  
+NoMethodError (undefined method `call' for #<ActionController::Parameters {"name"=>"eaeeae", "birth_date"=>"2022-01-05"} permitted: false>):
+  
+app/controllers/accounts_controller.rb:51:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started GET "/accounts" for ::1 at 2022-01-16 22:27:57 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"eaeeae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeae", "birth_date"=>"2022-01-05"}}
+  [1m[36mAccount Load (15.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 65ms (Views: 37.7ms | ActiveRecord: 26.7ms | Allocations: 3309)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:28:06 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 835)
+
+
+  
+NoMethodError (undefined method `call' for #<ActionController::Parameters {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"} permitted: false>):
+  
+app/controllers/accounts_controller.rb:51:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:28:42 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 50.8ms | Allocations: 1937)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started GET "/accounts" for ::1 at 2022-01-16 22:28:47 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+  [1m[36mAccount Load (15.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 35ms (Views: 18.6ms | ActiveRecord: 15.8ms | Allocations: 1296)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:28:53 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 174)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:29:11 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 53.0ms | Allocations: 1917)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:29:35 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 50.2ms | Allocations: 1923)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:29:52 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 54.2ms | Allocations: 1978)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:29:56 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 41.9ms | Allocations: 1925)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:30:11 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05", "account"=>{"name"=>"eaeeaaaaae", "birth_date"=>"2022-01-05"}}
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 53.1ms | Allocations: 1928)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:31:29 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (14.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 125ms (ActiveRecord: 71.6ms | Allocations: 21223)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:33:09 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 51.7ms | Allocations: 2116)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:19:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:34:10 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (13.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 108ms (ActiveRecord: 63.9ms | Allocations: 21410)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:19:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:34:49 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (21.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (12.8ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:34:50.120819"], ["updated_at", "2022-01-17 01:34:50.120819"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 108ms (Views: 2.4ms | ActiveRecord: 113.6ms | Allocations: 5026)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:35:04 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (23.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (12.7ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:35:04.848384"], ["updated_at", "2022-01-17 01:35:04.848384"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 110ms (Views: 2.1ms | ActiveRecord: 117.8ms | Allocations: 4248)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:35:29 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (19.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (11.0ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:35:29.875369"], ["updated_at", "2022-01-17 01:35:29.875369"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (27.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 107ms (Views: 2.2ms | ActiveRecord: 112.4ms | Allocations: 4260)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:36:37 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (12.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:50:in `account_params'
+  [1m[36mAccount Create (14.2ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", nil], ["birth_date", nil], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:36:38.269448"], ["updated_at", "2022-01-17 01:36:38.269448"]]
+  ↳ app/controllers/accounts_controller.rb:50:in `account_params'
+  [1m[36mTRANSACTION (29.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:50:in `account_params'
+Completed 500 Internal Server Error in 79ms (ActiveRecord: 96.8ms | Allocations: 4643)
+
+
+  
+NoMethodError (undefined method `params' for #<ActionController::Parameters {"name"=>"0101", "birth_date"=>"16-02-2022"} permitted: true>
+Did you mean?  parameters):
+  
+app/controllers/accounts_controller.rb:51:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:36:44 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 30.5ms | Allocations: 939)
+
+
+  
+NoMethodError (undefined method `params' for #<ActionController::Parameters {"name"=>"0101", "birth_date"=>"16-02-2022"} permitted: true>
+Did you mean?  parameters):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:36:57 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 55.3ms | Allocations: 2039)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:19:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:37:21 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 54.2ms | Allocations: 1970)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:37:23 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 168)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts/" for ::1 at 2022-01-16 22:37:27 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 167)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:37:30 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 176)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:18:in `create'
+Started GET "/accounts" for ::1 at 2022-01-16 22:37:32 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mAccount Load (15.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 49ms (Views: 33.5ms | ActiveRecord: 15.2ms | Allocations: 2017)
+
+
+Started GET "/accounts" for ::1 at 2022-01-16 22:37:42 -0300
+Processing by AccountsController#index as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mAccount Load (11.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  ↳ app/controllers/accounts_controller.rb:8:in `index'
+Completed 200 OK in 34ms (Views: 9.7ms | ActiveRecord: 55.2ms | Allocations: 3594)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:37:49 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (14.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:21:in `create'
+  [1m[36mAccount Create (10.7ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", nil], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:37:49.195041"], ["updated_at", "2022-01-17 01:37:49.195041"]]
+  ↳ app/controllers/accounts_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (26.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:21:in `create'
+Completed 201 Created in 77ms (Views: 1.7ms | ActiveRecord: 51.7ms | Allocations: 2389)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:38:37 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 45.7ms | Allocations: 1879)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:19:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:38:48 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:50: syntax error, unexpected ':', expecting ')'
+...new(params.merge(:account_bank:Faker::Bank.account_number))
+...                              ^
+C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:50: syntax error, unexpected ')', expecting `end'
+...ank:Faker::Bank.account_number))
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:50: syntax error, unexpected ':', expecting ')'
+app/controllers/accounts_controller.rb:50: syntax error, unexpected ')', expecting `end'
+app/controllers/accounts_controller.rb:50: syntax error, unexpected ':', expecting ')'
+app/controllers/accounts_controller.rb:50: syntax error, unexpected ')', expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 22:38:55 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 45.3ms | Allocations: 1898)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:50:in `account_params'
+app/controllers/accounts_controller.rb:19:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:39:23 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 45.8ms | Allocations: 989)
+
+
+  
+NoMethodError (undefined method `secure_number' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:39:42 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 44.8ms | Allocations: 1918)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:41:19 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 32.4ms | Allocations: 974)
+
+
+  
+NoMethodError (undefined method `secure_number' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:42:02 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 40.4ms | Allocations: 985)
+
+
+  
+NoMethodError (undefined method `secure_number' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:42:18 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 31.4ms | Allocations: 984)
+
+
+  
+NoMethodError (undefined method `secure_number' for SecureRandom:Module):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:42:34 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 57.0ms | Allocations: 1998)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:42:48 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 66.2ms | Allocations: 1919)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/accounts_controller.rb:49:in `account_params'
+app/controllers/accounts_controller.rb:18:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 22:43:26 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (20.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (22.8ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "1755976731"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:43:27.395925"], ["updated_at", "2022-01-17 01:43:27.395925"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (33.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 129ms (Views: 2.3ms | ActiveRecord: 135.5ms | Allocations: 4342)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:43:32 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (15.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (12.5ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "2745765952"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:43:32.512157"], ["updated_at", "2022-01-17 01:43:32.512157"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (19.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 80ms (Views: 1.9ms | ActiveRecord: 46.8ms | Allocations: 2282)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:43:36 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (18.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (16.8ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "6967690839"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:43:36.574768"], ["updated_at", "2022-01-17 01:43:36.574768"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 90ms (Views: 1.3ms | ActiveRecord: 61.1ms | Allocations: 2270)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:44:41 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:49: syntax error, unexpected label
+...r::Bank.account_number((digits: 6)), password_bank:Faker::In...
+...                        ^~~~~~~
+C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:50: syntax error, unexpected `end', expecting ')'
+    end
+    ^~~
+):
+  
+app/controllers/accounts_controller.rb:49: syntax error, unexpected label
+app/controllers/accounts_controller.rb:50: syntax error, unexpected `end', expecting ')'
+app/controllers/accounts_controller.rb:49: syntax error, unexpected label
+app/controllers/accounts_controller.rb:50: syntax error, unexpected `end', expecting ')'
+Started POST "/accounts" for ::1 at 2022-01-16 22:44:55 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:50: syntax error, unexpected `end', expecting ')'
+    end
+    ^~~
+):
+  
+app/controllers/accounts_controller.rb:50: syntax error, unexpected `end', expecting ')'
+app/controllers/accounts_controller.rb:50: syntax error, unexpected `end', expecting ')'
+Started POST "/accounts" for ::1 at 2022-01-16 22:45:03 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (18.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (12.7ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "3751026249"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:45:04.152179"], ["updated_at", "2022-01-17 01:45:04.152179"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (30.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 99ms (Views: 1.3ms | ActiveRecord: 107.2ms | Allocations: 4351)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:45:07 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (16.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (12.9ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "4322448272"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:45:07.133563"], ["updated_at", "2022-01-17 01:45:07.133563"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (32.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 98ms (Views: 2.6ms | ActiveRecord: 62.0ms | Allocations: 2269)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:56:12 -0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (15.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (20.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (13.9ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "9083505724"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:56:14.359212"], ["updated_at", "2022-01-17 01:56:14.359212"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (11.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 200ms (Views: 0.4ms | ActiveRecord: 122.3ms | Allocations: 24195)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:57:01 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+..."Olá, #{account.name}"@account.account_bank
+...                       ^~~~~~~~
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 22:57:14 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+...Olá, #{@account.name}"@account.account_bank
+...                       ^~~~~~~~
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 22:57:29 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+      render json: 'A'@account.account_bank
+                      ^~~~~~~~
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 22:58:04 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>
+Started POST "/accounts" for ::1 at 2022-01-16 22:58:14 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>
+Started POST "/accounts" for ::1 at 2022-01-16 22:58:48 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (11.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (14.6ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "3244446647"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:58:49.107313"], ["updated_at", "2022-01-17 01:58:49.107313"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (19.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 113ms (Views: 3.9ms | ActiveRecord: 103.1ms | Allocations: 4444)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:59:06 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected symbol literal, expecting `end'
+...    render json: @account.name:name
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected symbol literal, expecting `end'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected symbol literal, expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 22:59:13 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (15.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (17.9ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "8774540660"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 01:59:13.798998"], ["updated_at", "2022-01-17 01:59:13.798998"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (33.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 112ms (Views: 0.4ms | ActiveRecord: 119.7ms | Allocations: 4132)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 22:59:28 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '\n', expecting =>
+Started POST "/accounts" for ::1 at 2022-01-16 22:59:38 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+...er json: @account.name @account.account_bank
+...                       ^~~~~~~~
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 23:00:43 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (20.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (13.4ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "2945555978"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:00:43.993606"], ["updated_at", "2022-01-17 02:00:43.993606"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (23.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 90ms (Views: 0.5ms | ActiveRecord: 97.5ms | Allocations: 4210)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:00:54 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting =>
+... @account.name,  @account.name,status: :created, location: @...
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting =>
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting =>
+Started POST "/accounts" for ::1 at 2022-01-16 23:01:01 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting =>
+... @account.name,  @account.name, location: @account
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting =>
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting =>
+Started POST "/accounts" for ::1 at 2022-01-16 23:01:08 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (16.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (14.6ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "7533182061"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:01:09.158065"], ["updated_at", "2022-01-17 02:01:09.158065"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 201 Created in 94ms (Views: 0.6ms | ActiveRecord: 102.6ms | Allocations: 4204)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:02:16 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (11.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (19.6ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "1132592124"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:02:17.607961"], ["updated_at", "2022-01-17 02:02:17.607961"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (30.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 500 Internal Server Error in 123ms (ActiveRecord: 117.9ms | Allocations: 6145)
+
+
+  
+NameError (undefined local variable or method `account' for #<AccountsController:0x0000000003cb18>
+Did you mean?  @account):
+  
+app/controllers/accounts_controller.rb:21:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 23:02:36 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected ')', expecting '.' or &. or :: or '['
+...(@account.name,(@account.name))
+...                              ^
+C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:24: syntax error, unexpected `end', expecting ')'
+    end
+    ^~~
+C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:51: syntax error, unexpected `end', expecting ')'):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ')', expecting '.' or &. or :: or '['
+app/controllers/accounts_controller.rb:24: syntax error, unexpected `end', expecting ')'
+app/controllers/accounts_controller.rb:51: syntax error, unexpected `end', expecting ')'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ')', expecting '.' or &. or :: or '['
+app/controllers/accounts_controller.rb:24: syntax error, unexpected `end', expecting ')'
+app/controllers/accounts_controller.rb:51: syntax error, unexpected `end', expecting ')'
+Started POST "/accounts" for ::1 at 2022-01-16 23:02:39 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (16.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (15.7ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "1019226383"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:02:40.387741"], ["updated_at", "2022-01-17 02:02:40.387741"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (29.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 115ms (Views: 0.3ms | ActiveRecord: 129.0ms | Allocations: 4109)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:02:55 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (15.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (10.6ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "7915249830"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:02:56.306489"], ["updated_at", "2022-01-17 02:02:56.306489"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (28.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 500 Internal Server Error in 89ms (Views: 0.3ms | ActiveRecord: 122.8ms | Allocations: 4223)
+
+
+  
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  
+app/controllers/accounts_controller.rb:22:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 23:03:35 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected label
+...     render json: account_bank:Faker::Bank.account_number(),...
+...                  ^~~~~~~~~~~~~
+C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting `end'
+...k:Faker::Bank.account_number(), password_bank:Faker::Interne...
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected label
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting `end'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected label
+app/controllers/accounts_controller.rb:21: syntax error, unexpected ',', expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 23:03:53 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (10.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (12.0ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "8775671764"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:03:53.607450"], ["updated_at", "2022-01-17 02:03:53.607450"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (23.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 89ms (Views: 0.2ms | ActiveRecord: 103.7ms | Allocations: 4109)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:04:02 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (11.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (18.6ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "7692916461"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:04:02.478544"], ["updated_at", "2022-01-17 02:04:02.478544"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (28.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 500 Internal Server Error in 91ms (ActiveRecord: 98.9ms | Allocations: 5267)
+
+
+  
+NoMethodError (undefined method `password_bank' for "7692916461":String):
+  
+app/controllers/accounts_controller.rb:21:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 23:04:18 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+... @account.account_bank @account.password_bank
+...                       ^~~~~~~~
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+app/controllers/accounts_controller.rb:21: syntax error, unexpected instance variable, expecting `end'
+Started POST "/accounts" for ::1 at 2022-01-16 23:05:30 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+...ender json: @account, include [:name, :account_bank]
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+Started POST "/accounts" for ::1 at 2022-01-16 23:05:56 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+...ender json: @account, include [name, account_bank]
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+Started POST "/accounts" for ::1 at 2022-01-16 23:06:02 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+...ender json: @account, include [name]
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+app/controllers/accounts_controller.rb:21: syntax error, unexpected [, expecting `do' or '{' or '('
+Started POST "/accounts" for ::1 at 2022-01-16 23:06:22 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (19.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (11.7ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "8298371022"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:06:23.001317"], ["updated_at", "2022-01-17 02:06:23.001317"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (32.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 500 Internal Server Error in 119ms (ActiveRecord: 121.5ms | Allocations: 5379)
+
+
+  
+NoMethodError (undefined method `serializable_hash' for "0101":String):
+  
+app/controllers/accounts_controller.rb:21:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 23:07:19 -0300
+  
+SyntaxError (C:/Users/Lenovo/Desktop/null/bank/app/controllers/accounts_controller.rb:21: syntax error, unexpected '}', expecting =>
+...lude: [:name => {:account_bank}]
+...                              ^
+):
+  
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '}', expecting =>
+app/controllers/accounts_controller.rb:21: syntax error, unexpected '}', expecting =>
+Started POST "/accounts" for ::1 at 2022-01-16 23:08:52 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (17.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (12.5ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "1098240199"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:08:53.200490"], ["updated_at", "2022-01-17 02:08:53.200490"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (23.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 101ms (Views: 0.3ms | ActiveRecord: 103.6ms | Allocations: 4167)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:09:40 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (19.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (16.1ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "1637088683"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:09:41.255339"], ["updated_at", "2022-01-17 02:09:41.255339"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (23.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 96ms (Views: 0.3ms | ActiveRecord: 100.1ms | Allocations: 4113)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:09:53 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (25.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (11.4ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "8123939686"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:09:54.101246"], ["updated_at", "2022-01-17 02:09:54.101246"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (27.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 107ms (Views: 0.2ms | ActiveRecord: 117.1ms | Allocations: 4102)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:10:27 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (23.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (15.6ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "5856230323"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:10:27.724699"], ["updated_at", "2022-01-17 02:10:27.724699"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 500 Internal Server Error in 121ms (ActiveRecord: 122.7ms | Allocations: 5986)
+
+
+  
+NameError (undefined local variable or method `account' for #<AccountsController:0x000000000767a0>
+Did you mean?  @account):
+  
+app/controllers/accounts_controller.rb:21:in `create'
+Started POST "/accounts" for ::1 at 2022-01-16 23:10:59 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (10.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (13.1ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "6688207267"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:11:00.125378"], ["updated_at", "2022-01-17 02:11:00.125378"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (26.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 102ms (Views: 0.4ms | ActiveRecord: 102.2ms | Allocations: 4124)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:11:27 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (17.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (26.5ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "2796036664"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:11:27.768763"], ["updated_at", "2022-01-17 02:11:27.768763"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (30.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 124ms (Views: 0.2ms | ActiveRecord: 125.6ms | Allocations: 4120)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:11:40 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (20.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (18.1ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "5767435108"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:11:40.501940"], ["updated_at", "2022-01-17 02:11:40.501940"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (29.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 116ms (Views: 0.5ms | ActiveRecord: 121.4ms | Allocations: 4119)
+
+
+Started POST "/accounts" for ::1 at 2022-01-16 23:11:46 -0300
+Processing by AccountsController#create as */*
+  Parameters: {"name"=>"0101", "birth_date"=>"16-02-2022", "account"=>{"name"=>"0101", "birth_date"=>"16-02-2022"}}
+  [1m[36mTRANSACTION (16.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mAccount Create (23.3ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "birth_date", "photo", "account_bank", "balance", "password_bank", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "0101"], ["birth_date", "2022-02-16 00:00:00"], ["photo", nil], ["account_bank", "9900522286"], ["balance", 0.0], ["password_bank", "[FILTERED]"], ["created_at", "2022-01-17 02:11:46.861550"], ["updated_at", "2022-01-17 02:11:46.861550"]]
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (25.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:20:in `create'
+Completed 200 OK in 112ms (Views: 0.4ms | ActiveRecord: 122.9ms | Allocations: 4115)
+
+
